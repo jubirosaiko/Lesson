@@ -1,0 +1,57 @@
+float cx, cy, r;
+float px,py;
+float on_x, on_y;
+
+
+boolean on_c = false;
+boolean drag_c = false;
+
+void setup(){
+  size(300, 300);
+  cx = width / 2; //150
+  cy = height / 2; //150
+  r = 50;
+}
+
+void draw(){
+  background(255);
+  ellipse(cx, cy, 2*r, 2*r);
+}
+
+void mousePressed(){
+  println("mousePressed");
+ px = mouseX;
+ py = mouseY;
+ float dx = px - cx;
+ float dy = py - cy;
+  if (dx*dx + dy*dy < r*r){
+    println("press");
+    
+    on_c = true;
+  }else{
+    on_c = false;
+  }
+    if(on_c){
+      on_x = cx;
+      on_y = cy;
+      
+      drag_c = true;
+    }
+  }
+
+
+void mouseDragged(){
+  println("mouseDragged");
+ /*
+ on_x = cx;
+ on_y = cy;
+*/
+    if(drag_c){
+      cx = on_x + (mouseX - px);
+      cy = on_y + (mouseY - py);
+    }
+}
+void mouseReleased(){
+  println("mouseReleased");
+  drag_c = false;
+}
