@@ -1,0 +1,41 @@
+float cx, cy, r;
+float cx_1, cy_1, r_1;
+float cx_2, cy_2, r_2;
+float dx, dy;
+float C0, C1;
+
+void setup(){
+  size(512, 512);
+  cx = width / 2;
+  cy = height / 2;
+  r = 100;
+  r_2 = 30;
+  r_1 = r - r_2;
+}
+
+void draw()
+{
+ background(255);
+ //Big Circle
+ ellipse(cx, cy, r*2, r*2);
+ //Middle Circle
+ ellipse(cx, cy, r_1*2, r_1*2);
+ 
+ dx = mouseX - cx;
+ dy = mouseY - cy;
+ 
+ if((r_1*r_1) >= (dx*dx+dy*dy))
+ {
+   cx_2 = mouseX;
+   cy_2 = mouseY;
+   ellipse(cx_2, cy_2, r_2*2, r_2*2);
+ }else
+ {
+   C0 = (dx*dx) + (dy*dy);
+   C1 = C0 / (r_1*r_1);
+   cx_2 = cx + (dx / sqrt(C1));
+   cy_2 = cy + (dy / sqrt(C1));
+   //Small Circle
+   ellipse(cx_2, cy_2, r_2*2, r_2*2);
+ }
+}
